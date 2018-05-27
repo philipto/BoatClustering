@@ -79,7 +79,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController : MKMapViewDelegate {
+extension ViewController: MKMapViewDelegate {
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard let annotation = annotation as? Cycle else { return nil }
