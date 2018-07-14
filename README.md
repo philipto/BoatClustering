@@ -48,20 +48,24 @@ Customize the behavior and appearance of a clustering annotation view by subclas
 [8]:x-source-tag://BicycleAnnotationView
 
 ``` swift
-if let cluster = annotation as? MKClusterAnnotation {
-    let totalBikes = cluster.memberAnnotations.count
-
-    if count(cycleType: .unicycle) > 0 {
-        image = drawUnicycleCount(count: totalBikes)
-    } else {
-        let tricycleCount = count(cycleType: .tricycle)
-        image = drawRatioBicycleToTricycle(tricycleCount, to: totalBikes)
-    }
-
-    if count(cycleType: .unicycle) > 0 {
-        displayPriority = .defaultLow
-    } else {
-        displayPriority = .defaultHigh
+override func prepareForDisplay() {
+    super.prepareForDisplay()
+    
+    if let cluster = annotation as? MKClusterAnnotation {
+        let totalBikes = cluster.memberAnnotations.count
+        
+        if count(cycleType: .unicycle) > 0 {
+            image = drawUnicycleCount(count: totalBikes)
+        } else {
+            let tricycleCount = count(cycleType: .tricycle)
+            image = drawRatioBicycleToTricycle(tricycleCount, to: totalBikes)
+        }
+        
+        if count(cycleType: .unicycle) > 0 {
+            displayPriority = .defaultLow
+        } else {
+            displayPriority = .defaultHigh
+        }
     }
 }
 ```
