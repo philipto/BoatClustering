@@ -8,53 +8,56 @@ import MapKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet private weak var mapView: MKMapView!
+    private var userTrackingButton: MKUserTrackingButton!
+    private var scaleView: MKScaleView!
     
     // Create a location manager to trigger user tracking
-    let locationManager: CLLocationManager = {
-        let manager = CLLocationManager()
-        manager.requestWhenInUseAuthorization()
-        manager.startUpdatingLocation()
-        return manager
-    }()
+    private let locationManager = CLLocationManager()
     
-    func setupCompassButton() {
+    private func setupCompassButton() {
         let compass = MKCompassButton(mapView: mapView)
         compass.compassVisibility = .visible
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: compass)
         mapView.showsCompass = false
     }
 
-    func setupUserTrackingButtonAndScaleView() {
+    private func setupUserTrackingButtonAndScaleView() {
         mapView.showsUserLocation = true
         
-        let button = MKUserTrackingButton(mapView: mapView)
-        button.layer.backgroundColor = UIColor.translucentButtonColor?.cgColor
-        button.layer.borderColor = UIColor.white.cgColor
-        button.layer.borderWidth = 1
-        button.layer.cornerRadius = 5
-        button.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(button)
+        userTrackingButton = MKUserTrackingButton(mapView: mapView)
+        userTrackingButton.layer.backgroundColor = UIColor.translucentButtonColor?.cgColor
+        userTrackingButton.layer.borderColor = UIColor.white.cgColor
+        userTrackingButton.layer.borderWidth = 1
+        userTrackingButton.layer.cornerRadius = 5
+        userTrackingButton.isHidden = true // Unhides when location authorization is given.
+        view.addSubview(userTrackingButton)
         
-        let scale = MKScaleView(mapView: mapView)
-        scale.legendAlignment = .trailing
-        scale.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(scale)
+        // By default, `MKScaleView` uses adaptive visibility, so it only displays when zooming the map.
+        // This is behavior is confirgurable with the `scaleVisibility` property.
+        scaleView = MKScaleView(mapView: mapView)
+        scaleView.legendAlignment = .trailing
+        view.addSubview(scaleView)
         
-        NSLayoutConstraint.activate([button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-                                     button.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-                                     scale.trailingAnchor.constraint(equalTo: button.safeAreaLayoutGuide.leadingAnchor, constant: -10),
-                                     scale.centerYAnchor.constraint(equalTo: button.safeAreaLayoutGuide.centerYAnchor)])
+        let stackView = UIStackView(arrangedSubviews: [scaleView, userTrackingButton])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.spacing = 10
+        view.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+                                     stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10)])
     }
 
-    func registerAnnotationViewClasses() {
+    private func registerAnnotationViewClasses() {
         mapView.register(UnicycleAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         mapView.register(BicycleAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         mapView.register(TricycleAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         mapView.register(ClusterAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
     }
     
-    func loadDataForMapRegionAndBikes() {
+    private func loadDataForMapRegionAndBikes() {
         guard let plistURL = Bundle.main.url(forResource: "Data", withExtension: "plist") else {
             fatalError("Failed to resolve URL for `Data.plist` in bundle.")
         }
@@ -75,6 +78,11 @@ class ViewController: UIViewController {
         setupCompassButton()
         setupUserTrackingButtonAndScaleView()
         registerAnnotationViewClasses()
+        
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
         loadDataForMapRegionAndBikes()
     }
 }
@@ -93,5 +101,12 @@ extension ViewController: MKMapViewDelegate {
             return TricycleAnnotationView(annotation: annotation, reuseIdentifier: TricycleAnnotationView.ReuseID)
         }
     }
+}
 
+extension ViewController: CLLocationManagerDelegate {
+ 
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        let locationAuthorized = status == .authorizedWhenInUse
+        userTrackingButton.isHidden = !locationAuthorized
+    }
 }

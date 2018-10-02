@@ -80,7 +80,7 @@ class ClusterAnnotationView: MKAnnotationView {
         }
     }
 
-    private func count(cycleType type: CycleType) -> Int {
+    private func count(cycleType type: Cycle.CycleType) -> Int {
         guard let cluster = annotation as? MKClusterAnnotation else {
             return 0
         }
