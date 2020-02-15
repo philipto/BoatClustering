@@ -26,12 +26,8 @@ class ViewController: UIViewController {
         mapView.showsUserLocation = true
         
         userTrackingButton = MKUserTrackingButton(mapView: mapView)
-        userTrackingButton.layer.backgroundColor = UIColor.translucentButtonColor?.cgColor
-        userTrackingButton.layer.borderColor = UIColor.white.cgColor
-        userTrackingButton.layer.borderWidth = 1
-        userTrackingButton.layer.cornerRadius = 5
         userTrackingButton.isHidden = true // Unhides when location authorization is given.
-        view.addSubview(userTrackingButton)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: userTrackingButton)
         
         // By default, `MKScaleView` uses adaptive visibility, so it only displays when zooming the map.
         // This is behavior is confirgurable with the `scaleVisibility` property.

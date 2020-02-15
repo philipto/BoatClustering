@@ -21,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4DC5889DE76EF401A0054C20 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
 		6088818C1FFFF1F60027E2D7 /* Cycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cycle.swift; sourceTree = "<group>"; };
 		60F970861FE1ED8B008CBE09 /* UIColor+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Theme.swift"; sourceTree = "<group>"; };
 		9F1680731ECF57AC008B3B25 /* ClusterAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterAnnotationView.swift; sourceTree = "<group>"; };
@@ -35,8 +36,7 @@
 		9F90FE8A1ED4E1C5003B1E35 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9FB957461ECF67850080CB0C /* Data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Data.plist; sourceTree = "<group>"; };
 		9FC208D31EBA94A100DAD70E /* MapData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapData.swift; sourceTree = "<group>"; };
-		BF5C2B20BF5C2C6000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
-		BF5F3950BF5F34A000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
+		B36B2F7F7B135F89F5C92A31 /* SampleCode.xcconfig */ = {isa = PBXFileReference; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,14 +50,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C548483A94EF62280B2FBA0 /* LICENSE */ = {
+			isa = PBXGroup;
+			children = (
+				4DC5889DE76EF401A0054C20 /* LICENSE.txt */,
+			);
+			name = LICENSE;
+			path = LICENSE;
+			sourceTree = "<group>";
+		};
+		6EDF46140E9B693F50B836C2 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				B36B2F7F7B135F89F5C92A31 /* SampleCode.xcconfig */,
+			);
+			name = Configuration;
+			sourceTree = "<group>";
+		};
 		9F7038221EA835EB00DA5564 = {
 			isa = PBXGroup;
 			children = (
 				9F90FE8A1ED4E1C5003B1E35 /* README.md */,
 				9F70382D1EA835EB00DA5564 /* Tandm */,
 				9F70382C1EA835EB00DA5564 /* Products */,
-				BF5C4660BF5C462000000001 /* Configuration */,
-				BF5F3AC0BF5F325000000001 /* LICENSE */,
+				6EDF46140E9B693F50B836C2 /* Configuration */,
+				6C548483A94EF62280B2FBA0 /* LICENSE */,
 			);
 			sourceTree = "<group>";
 		};
@@ -88,23 +105,6 @@
 			path = Tandm;
 			sourceTree = "<group>";
 		};
-		BF5C4660BF5C462000000001 /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-				BF5C2B20BF5C2C6000000001 /* SampleCode.xcconfig */,
-			);
-			name = Configuration;
-			sourceTree = "<group>";
-		};
-		BF5F3AC0BF5F325000000001 /* LICENSE */ = {
-			isa = PBXGroup;
-			children = (
-				BF5F3950BF5F34A000000001 /* LICENSE.txt */,
-			);
-			name = LICENSE;
-			path = LICENSE;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -115,7 +115,6 @@
 				9F7038271EA835EB00DA5564 /* Sources */,
 				9F7038281EA835EB00DA5564 /* Frameworks */,
 				9F7038291EA835EB00DA5564 /* Resources */,
-				60F970851FE1DF63008CBE09,
 			);
 			buildRules = (
 			);
@@ -133,12 +132,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = Apple;
 				TargetAttributes = {
 					9F70382A1EA835EB00DA5564 = {
 						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1100;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -219,7 +218,7 @@
 /* Begin XCBuildConfiguration section */
 		9F70383B1EA835EB00DA5564 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF5C2B20BF5C2C6000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = B36B2F7F7B135F89F5C92A31 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -278,7 +277,7 @@
 		};
 		9F70383C1EA835EB00DA5564 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF5C2B20BF5C2C6000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = B36B2F7F7B135F89F5C92A31 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -330,7 +329,7 @@
 		};
 		9F70383E1EA835EB00DA5564 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF5C2B20BF5C2C6000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = B36B2F7F7B135F89F5C92A31 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
@@ -339,15 +338,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Tandm${SAMPLE_CODE_DISAMBIGUATOR}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		9F70383F1EA835EB00DA5564 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF5C2B20BF5C2C6000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = B36B2F7F7B135F89F5C92A31 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
@@ -356,8 +354,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Tandm${SAMPLE_CODE_DISAMBIGUATOR}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

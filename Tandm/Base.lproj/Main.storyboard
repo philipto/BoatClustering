@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14101" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3ey-lL-0mJ">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14835.7" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3ey-lL-0mJ">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14086"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14790.5"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Tandm Bicycle Rentals-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Tandm" customModuleProvider="target" sceneMemberID="viewController">
@@ -30,20 +29,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ljA-B0-WDe">
-                        <connections>
-                            <outlet property="titleView" destination="eIo-pb-Hml" id="hle-5L-2Ls"/>
-                        </connections>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Tandm Bicycle Rentals" id="ljA-B0-WDe"/>
                     <connections>
                         <outlet property="mapView" destination="O32-Ux-jkO" id="Pm6-hX-TH0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" id="eIo-pb-Hml">
-                    <rect key="frame" x="0.0" y="0.0" width="200" height="54"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                </imageView>
             </objects>
             <point key="canvasLocation" x="1136.8" y="792.95352323838085"/>
         </scene>
@@ -53,7 +44,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3ey-lL-0mJ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FaN-bo-3GR">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -69,7 +60,4 @@
             <point key="canvasLocation" x="213.59999999999999" y="792.95352323838085"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="logo" width="300" height="80"/>
-    </resources>
 </document>
