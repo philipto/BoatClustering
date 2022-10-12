@@ -24,16 +24,21 @@ class ClusterAnnotationView: MKAnnotationView {
         super.prepareForDisplay()
         
         if let cluster = annotation as? MKClusterAnnotation {
-            let totalBikes = cluster.memberAnnotations.count
+            let totalBoats = cluster.memberAnnotations.count
             
-            if count(cycleType: .unicycle) > 0 {
-                image = drawUnicycleCount(count: totalBikes)
+            if count(boatType: .reserved) > 0 {
+                image = drawReservedCount(count: totalBoats)
             } else {
-                let tricycleCount = count(cycleType: .tricycle)
-                image = drawRatioBicycleToTricycle(tricycleCount, to: totalBikes)
+                if count(boatType: .partlyBooked) > 0 {
+                    image = drawPartlyBookedCount(count: totalBoats)
+                }
+                else {
+                    let reservedCount = count(boatType: .reserved)
+                    image = drawRatioReservedToTotal(reservedCount, to: totalBoats)
+                }
             }
             
-            if count(cycleType: .unicycle) > 0 {
+            if count(boatType: .available) > 0 {
                 displayPriority = .defaultLow
             } else {
                 displayPriority = .defaultHigh
@@ -41,12 +46,16 @@ class ClusterAnnotationView: MKAnnotationView {
         }
     }
 
-    private func drawRatioBicycleToTricycle(_ tricycleCount: Int, to totalBikes: Int) -> UIImage {
-        return drawRatio(tricycleCount, to: totalBikes, fractionColor: UIColor.tricycleColor, wholeColor: UIColor.bicycleColor)
+    private func drawRatioReservedToTotal(_ reservedCount: Int, to totalBoats: Int) -> UIImage {
+        return drawRatio(reservedCount, to: totalBoats, fractionColor: UIColor.reservedColor, wholeColor: UIColor.availableColor)
     }
 
-    private func drawUnicycleCount(count: Int) -> UIImage {
-        return drawRatio(0, to: count, fractionColor: nil, wholeColor: UIColor.unicycleColor)
+    private func drawReservedCount(count: Int) -> UIImage {
+        return drawRatio(0, to: count, fractionColor: nil, wholeColor: UIColor.reservedColor)
+    }
+    
+    private func drawPartlyBookedCount(count: Int) -> UIImage {
+        return drawRatio(0, to: count, fractionColor: nil, wholeColor: UIColor.partlyBookedColor)
     }
 
     private func drawRatio(_ fraction: Int, to whole: Int, fractionColor: UIColor?, wholeColor: UIColor?) -> UIImage {
@@ -80,16 +89,16 @@ class ClusterAnnotationView: MKAnnotationView {
         }
     }
 
-    private func count(cycleType type: Cycle.CycleType) -> Int {
+    private func count(boatType type: Boat.BoatType) -> Int {
         guard let cluster = annotation as? MKClusterAnnotation else {
             return 0
         }
 
         return cluster.memberAnnotations.filter { member -> Bool in
-            guard let bike = member as? Cycle else {
+            guard let boat = member as? Boat else {
                 fatalError("Found unexpected annotation type")
             }
-            return bike.type == type
+            return boat.type == type
         }.count
     }
 }

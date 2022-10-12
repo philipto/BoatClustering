@@ -1,13 +1,12 @@
 {
   "images" : [
     {
+      "filename" : "sailboat.png",
       "idiom" : "universal",
-      "filename" : "Bicycle.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Bicycle_2x.png",
       "scale" : "2x"
     },
     {
@@ -16,10 +15,7 @@
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
-  },
-  "properties" : {
-    "template-rendering-intent" : "template"
+    "author" : "xcode",
+    "version" : 1
   }
 }

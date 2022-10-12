@@ -47,23 +47,24 @@ class ViewController: UIViewController {
     }
 
     private func registerAnnotationViewClasses() {
-        mapView.register(UnicycleAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-        mapView.register(BicycleAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-        mapView.register(TricycleAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        mapView.register(AvailableAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        mapView.register(PartlyBookedAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        mapView.register(ReservedBoatAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         mapView.register(ClusterAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
     }
     
-    private func loadDataForMapRegionAndBikes() {
-        guard let plistURL = Bundle.main.url(forResource: "Data", withExtension: "plist") else {
-            fatalError("Failed to resolve URL for `Data.plist` in bundle.")
+    private func loadDataForMapRegionAndBoats() {
+        guard let plistURL = Bundle.main.url(forResource: "blocations", withExtension: "plist") else {
+            fatalError("Failed to resolve URL for `blocations.plist` in bundle.")
         }
 
         do {
             let plistData = try Data(contentsOf: plistURL)
             let decoder = PropertyListDecoder()
             let decodedData = try decoder.decode(MapData.self, from: plistData)
-            mapView.region = decodedData.region
-            mapView.addAnnotations(decodedData.cycles)
+            
+//            mapView.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude:45.1, longitude:15.2), span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
+            mapView.addAnnotations(decodedData.boats)
         } catch {
             fatalError("Failed to load provided data, error: \(error.localizedDescription)")
         }
@@ -79,22 +80,24 @@ class ViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
-        loadDataForMapRegionAndBikes()
+        loadDataForMapRegionAndBoats()
     }
 }
 
 extension ViewController: MKMapViewDelegate {
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard let annotation = annotation as? Cycle else { return nil }
+        guard let annotation = annotation as? Boat else { return nil }
 
         switch annotation.type {
-        case .unicycle:
-            return UnicycleAnnotationView(annotation: annotation, reuseIdentifier: UnicycleAnnotationView.ReuseID)
-        case .bicycle:
-            return BicycleAnnotationView(annotation: annotation, reuseIdentifier: BicycleAnnotationView.ReuseID)
-        case .tricycle:
-            return TricycleAnnotationView(annotation: annotation, reuseIdentifier: TricycleAnnotationView.ReuseID)
+        case .unavailable:
+            return UnavailableAnnotationView(annotation: annotation, reuseIdentifier: UnavailableAnnotationView.ReuseID)
+        case .available:
+            return AvailableAnnotationView(annotation: annotation, reuseIdentifier: AvailableAnnotationView.ReuseID)
+        case .partlyBooked:
+            return PartlyBookedAnnotationView(annotation: annotation, reuseIdentifier: PartlyBookedAnnotationView.ReuseID)
+        case .reserved:
+            return ReservedBoatAnnotationView(annotation: annotation, reuseIdentifier: ReservedBoatAnnotationView.ReuseID)
         }
     }
 }

@@ -7,15 +7,16 @@ The annotation data object representing all types of cycles.
 
 import MapKit
 
-class Cycle: NSObject, Decodable, MKAnnotation {
+class Boat: NSObject, Decodable, MKAnnotation {
     
-    enum CycleType: Int, Decodable {
-        case unicycle
-        case bicycle
-        case tricycle
+    enum BoatType: Int, Decodable {
+        case unavailable
+        case available
+        case partlyBooked
+        case reserved
     }
     
-    var type: CycleType = .unicycle
+    var type: BoatType = .available
     
     private var latitude: CLLocationDegrees = 0
     private var longitude: CLLocationDegrees = 0

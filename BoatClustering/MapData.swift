@@ -9,11 +9,11 @@ import MapKit
 import CoreLocation
 
 struct MapData: Decodable {
-    let cycles: [Cycle]
+    let boats: [Boat]
 
-    let centerLatitude: CLLocationDegrees
-    let centerLongitude: CLLocationDegrees
-    let latitudeDelta: CLLocationDegrees
+    let centerLatitude: CLLocationDegrees = 45.1
+    let centerLongitude: CLLocationDegrees = 15.2
+    let latitudeDelta: CLLocationDegrees = 10
     let longitudeDelta: CLLocationDegrees
 
     var region: MKCoordinateRegion {
